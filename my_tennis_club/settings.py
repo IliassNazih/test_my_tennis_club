@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.db import models
+from django_google_maps import fields as map_fields
+
+#Essai d'ajout de l'api Gg maps
+class Rental(models.Model):
+    address = map_fields.AdressField(max_length = 200)
+    geolocation = map_fields.GeoLocationField(max_length = 100)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
