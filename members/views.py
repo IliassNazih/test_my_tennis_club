@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Member
+from .forms import MemberForm
 
 # Create your views here.
 def members(request):
