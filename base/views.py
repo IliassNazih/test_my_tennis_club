@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login,logout
 from .models import Service, Topic
 from .forms import ServiceForm
 
@@ -10,6 +13,32 @@ from .forms import ServiceForm
 #     {'id':2, 'name':'tondeuse'},
 #     {'id':3, 'name':'laveauto'},
 # ]
+
+def loginPage(request):
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+        
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username or Password does not exist')
+    context = {}
+    return render(request, 'base/login_register.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
 
 def home(request):
     q=request.GET.get('q') if request.GET.get('q') !=None else ''
@@ -31,7 +60,7 @@ def service(request, pk):
     context = {'service': service}
     return render(request, 'base/service.html', context)
 
-
+@login_required(login_url = 'login')
 def createService(request):
     form = ServiceForm()
     if request.method == 'POST':
@@ -43,9 +72,13 @@ def createService(request):
     context = {'form': form}
     return render(request, 'base/service_form.html', context)
 
+@login_required(login_url = 'login')
 def updateService(request, pk):
     service = Service.objects.get(id = pk)
     form = ServiceForm(instance= service)
+
+    if request.user != service.host:
+        return HttpResponse('You are not allowed to update this service')
 
     if request.method == 'POST':
         form = ServiceForm(request.POST, instance = service)
@@ -56,8 +89,14 @@ def updateService(request, pk):
     context = {'form': form}
     return render(request, 'base/service_form.html', context)
 
+@login_required(login_url = 'login')
 def deleteService(request, pk):
     service = Service.objects.get(id=pk)
+
+    if request.user != service.host:
+        return HttpResponse('You are not allowed to delete this service')
+
+
     if request.method == 'POST':
         service.delete()
         return redirect('home')
