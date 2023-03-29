@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Service
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.db.models import Q
+from .models import Service, Topic
 from .forms import ServiceForm
 
 # services = [
@@ -9,8 +12,18 @@ from .forms import ServiceForm
 # ]
 
 def home(request):
-    services = Service.objects.all()
-    context = {'services':services}
+    q=request.GET.get('q') if request.GET.get('q') !=None else ''
+
+    services = Service.objects.filter(
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
+        )
+
+    topics = Topic.objects.all()
+    service_count = services.count()
+
+    context = {'services':services, 'topics':topics, 'service_count':service_count}
     return render(request, 'base/home.html', context)
 
 def service(request, pk):
