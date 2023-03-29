@@ -31,7 +31,7 @@ def createRoom(request):
     return render(request, 'base/room_form.html', context)
 
 def updateRoom(request, pk):
-    room = Room.objects.get(id = pk)
+    room = Service.objects.get(id = pk)
     form = RoomForm(instance= room)
 
     if request.method == 'POST':
