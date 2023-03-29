@@ -16,3 +16,4 @@ def room(request, pk):
     room = Service.objects.get(id=pk)   
     context = {'room': room}
     return render(request, 'base/room.html', context)
+
