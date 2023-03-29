@@ -1,44 +1,51 @@
 from django.shortcuts import render, redirect
 from .models import Service
-from .forms import RoomForm
+from .forms import ServiceForm
 
-# rooms = [
+# services = [
 #     {'id':1, 'name':'deneigement'},
 #     {'id':2, 'name':'tondeuse'},
 #     {'id':3, 'name':'laveauto'},
 # ]
 
 def home(request):
-    rooms = Service.objects.all()
-    context = {'rooms':rooms}
+    services = Service.objects.all()
+    context = {'services':services}
     return render(request, 'base/home.html', context)
 
-def room(request, pk):
-    room = Service.objects.get(id=pk)   
-    context = {'room': room}
-    return render(request, 'base/room.html', context)
+def service(request, pk):
+    service = Service.objects.get(id=pk)   
+    context = {'service': service}
+    return render(request, 'base/service.html', context)
 
 
-def createRoom(request):
-    form = RoomForm()
+def createService(request):
+    form = ServiceForm()
     if request.method == 'POST':
-        form = RoomForm(request.POST)
+        form = ServiceForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
 
-    context = {}
-    return render(request, 'base/room_form.html', context)
+    context = {'form': form}
+    return render(request, 'base/service_form.html', context)
 
-def updateRoom(request, pk):
-    room = Service.objects.get(id = pk)
-    form = RoomForm(instance= room)
+def updateService(request, pk):
+    service = Service.objects.get(id = pk)
+    form = ServiceForm(instance= service)
 
     if request.method == 'POST':
-        form = RoomForm(request.POST, instance= room)
+        form = ServiceForm(request.POST, instance = service)
         if form.is_valid():
             form.save()
-            return redirect()
+            return redirect('home')
         
     context = {'form': form}
-    return render(request, 'base/room_form.html', context)
+    return render(request, 'base/service_form.html', context)
+
+def deleteService(request, pk):
+    service = Service.objects.get(id=pk)
+    if request.method == 'POST':
+        service.delete()
+        return redirect('home')
+    return render(request, 'base/delete.html', {'obj': service})

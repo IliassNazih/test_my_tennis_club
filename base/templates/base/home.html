@@ -8,15 +8,16 @@
 
 <div>
 
-    <a href = "{% url 'create-room' %}">Create Room</a>
+    <a href = "{% url 'create-service' %}">Create Service</a>
 
     <div>
-        {% for room in rooms %}
+        {% for service in services %}
             <div>
-                <a href = "{% url 'update-room' room.id %}">Edit</a>
-                <span>@{{room.host.username}}</span>
-                <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
-                <small>{{room.topic.name}}</small>
+                <a href = "{% url 'update-service' service.id %}">Edit</a>
+                <a href = "{% url 'delete-service' service.id %}">Delete</a>
+                <span>@{{service.host.username}}</span>
+                <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                <small>{{service.topic.name}}</small>
                 <hr>
             </div>
 
