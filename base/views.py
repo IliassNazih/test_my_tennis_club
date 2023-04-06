@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import Service, Topic
+from .models import Service, Topic, Message
 from .forms import ServiceForm
 
 # services = [
@@ -78,8 +78,16 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 def service(request, pk):
-    service = Service.objects.get(id=pk)   
-    context = {'service': service}
+    service = Service.objects.get(id=pk)
+    service_messages = service.message_set.all().order_by('-created')
+
+    if request.method == 'POST':
+        message = Message.objects.create(user= request.user,
+                                         service = service,
+                                         body = request.POST.get('body'))
+        return redirect('service', pk = service.id)
+
+    context = {'service': service, 'service_messages': service_messages}
     return render(request, 'base/service.html', context)
 
 @login_required(login_url = 'login')
