@@ -90,6 +90,10 @@ def service(request, pk):
     context = {'service': service, 'service_messages': service_messages}
     return render(request, 'base/service.html', context)
 
+def userProfile(request):
+    context{}
+    return render(request,'base/profile.html', context)
+
 @login_required(login_url = 'login')
 def createService(request):
     form = ServiceForm()
