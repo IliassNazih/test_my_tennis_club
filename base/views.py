@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Service, Topic, Message
 from .forms import ServiceForm
 import folium
+from geopy.geocoders import Nominatim
 
 # services = [
 #     {'id':1, 'name':'deneigement'},
