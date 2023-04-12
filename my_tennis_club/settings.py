@@ -134,7 +134,7 @@ STATIC_ROOT = BASE_DIR / 'productionfiles'
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'mystaticfiles'
+    BASE_DIR / 'static'
 ]
 
 # Default primary key field type
