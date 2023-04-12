@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import UserCreationForm
 from .models import Service, Topic, Message
 from .forms import ServiceForm
+import folium
 
 # services = [
 #     {'id':1, 'name':'deneigement'},
@@ -138,3 +139,16 @@ def deleteService(request, pk):
         service.delete()
         return redirect('home')
     return render(request, 'base/delete.html', {'obj': service})
+
+def map_view(request):
+    # Create a map object
+    map = folium.Map(location=[45.508888, -73.561668], zoom_start=13)
+
+    # Add a marker to the map
+    folium.Marker([45.508888, -73.561668], popup='Montreal,QC').add_to(map)
+    folium.Marker([46.508888, -73.561668], popup='Shawinigan,QC').add_to(map)
+
+
+    map_html = map._repr_html_()
+    context = {'map_html': map_html}
+    return render(request, 'map.html', context)
