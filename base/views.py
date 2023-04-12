@@ -96,7 +96,9 @@ def createService(request):
     if request.method == 'POST':
         form = ServiceForm(request.POST)
         if form.is_valid():
-            form.save()
+            service = form.save(commit= False)
+            service.host = request.user
+            service.save()
             return redirect('home')
 
     context = {'form': form}
