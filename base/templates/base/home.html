@@ -13,40 +13,16 @@
 <div class = "home-container">
 
     <div>
-        <h3>Browse Topics</h3>
-        <hr>
-
-        <div>
-            <a href = "{% url 'home' %}">All</a>
-        </div>
-
-        {% for topic in topics %}
-            <div>
-                <a href = "{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
-            </div>
-        {% endfor %}
-
+        {% include 'base/topics_component.html' %}
     </div>
 
     <div>
         <h5>{{service_count}} services disponibles</h5>
-       <a href = "{% url 'create-service' %}">Create Service</a>
+        <a href = "{% url 'create-service' %}">Create Service</a>
 
-        <div>
-        {% for service in services %}
-            <div>
-                {% if request.user == service.host %}
-                <a href = "{% url 'update-service' service.id %}">Edit</a>
-                <a href = "{% url 'delete-service' service.id %}">Delete</a>
-                {% endif %}
-                <span>@{{service.host.username}}</span>
-                <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
-                <small>{{service.topic.name}}</small>
-                <hr>
-            </div>
+        {% include 'base/feed_component.html' %}
+    </div> 
 
-        {% endfor %}
-        </div> 
     </div>
 </div>
 

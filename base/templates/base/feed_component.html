@@ -1,0 +1,16 @@
+
+
+        <div>
+        {% for service in services %}
+            <div>
+                {% if request.user == service.host %}
+                <a href = "{% url 'update-service' service.id %}">Edit</a>
+                <a href = "{% url 'delete-service' service.id %}">Delete</a>
+                {% endif %}
+                <span>@{{service.host.username}}</span>
+                <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                <small>{{service.topic.name}}</small>
+                <hr>
+            </div>
+
+        {% endfor %}
