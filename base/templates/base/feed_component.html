@@ -7,7 +7,8 @@
                 <a href = "{% url 'update-service' service.id %}">Edit</a>
                 <a href = "{% url 'delete-service' service.id %}">Delete</a>
                 {% endif %}
-                <span>@{{service.host.username}}</span>
+
+                <a href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
                 <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
                 <small>{{service.topic.name}}</small>
                 <hr>
