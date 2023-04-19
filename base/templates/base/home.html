@@ -6,12 +6,12 @@
 <style>
     .home-container{
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 1fr 3fr 1fr;
     }
 </style>
 
 <div class = "home-container">
-
+    <div></div>
     <div>
         {% include 'base/topics_component.html' %}
         <a href = "{% url 'map_view' %}"> Map view</a>
@@ -23,7 +23,7 @@
 
         {% include 'base/feed_component.html' %}
     </div> 
-
+    <div></div>
     
 </div>
 

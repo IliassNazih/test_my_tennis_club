@@ -5,10 +5,12 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.forms import UserCreationForm
 from .models import Service, Topic, Message
 from .forms import ServiceForm
+from geopy.geocoders import Nominatim
 import folium
+from base.models import Adresse
+from base.forms import UserForm
 
 # services = [
 #     {'id':1, 'name':'deneigement'},
@@ -48,19 +50,15 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    form = UserCreationForm()
-
+    form = CustomUserCreationForm(request.POST)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit = False)
-            user.username = user.username.lower()
-            user.save()
+            user = form.save()
             login(request, user)
             return redirect('home')
-        else:
-            messages.error(request, 'An error occurred during registration')
-
+    else:
+        form = CustomUserCreationForm()
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
@@ -91,10 +89,12 @@ def service(request, pk):
     context = {'service': service, 'service_messages': service_messages}
     return render(request, 'base/service.html', context)
 
+
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
     context = {'user': user}
     return render(request,'base/profile.html', context)
+    
 
 @login_required(login_url = 'login')
 def createService(request):
@@ -141,6 +141,15 @@ def deleteService(request, pk):
     return render(request, 'base/delete.html', {'obj': service})
 
 def map_view(request):
+    address = "1600 Amphitheatre Parkway, Mountain View, CA"
+    geolocator = Nominatim(user_agent="my-application")
+    location = geolocator.geocode(address)
+    latitude = location.latitude
+    longitude = location.longitude
+    # create a map centered on the location of the address
+    # map = folium.Map(location=[latitude, longitude], zoom_start=15)
+    # # add a marker to the map with a popup showing the address
+    # marker = folium.Marker([latitude, longitude], popup=address).add_to(map)
     # Create a map object
     map = folium.Map(location=[45.508888, -73.561668], zoom_start=13)
 
@@ -152,3 +161,7 @@ def map_view(request):
     map_html = map._repr_html_()
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
+
+def liste_adresses(request):
+    adresses = Adresse.objects.all()
+    return render(request, 'liste_adresses.html', {'adresses': adresses})

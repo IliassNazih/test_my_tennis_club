@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <h1>Addresse Liste</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>ZIP Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for address in addresses %}
+        <tr>
+          <td>{{ address.user.username }}</td>
+          <td>{{ address.street }}</td>
+          <td>{{ address.city }}</td>
+          <td>{{ address.zip_code }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No addresses found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

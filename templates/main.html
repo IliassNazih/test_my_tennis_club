@@ -3,6 +3,9 @@
 <html>
 <head>
     <meta charset='utf-8'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Service à domicile rapide</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -10,6 +13,13 @@
     
 </head>
 <body>
+    <div class="jumbotron">
+        <div class="container text-center">
+          <h1>Service a Domicile rapide</h1>      
+          <p>Demandez et faites des services a des milliers d'utilisateurs</p>
+        </div>
+      </div>
+
     {% include 'navbar.html' %}
 
     {% if messages %}
@@ -23,7 +33,6 @@
     <img src = "{% static 'images/Models.jpg' %}" />
     
     {% block content %}
-
 
     {% endblock %}
 </body>
