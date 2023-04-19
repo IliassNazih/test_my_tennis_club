@@ -151,11 +151,11 @@ def map_view(request):
     # # add a marker to the map with a popup showing the address
     # marker = folium.Marker([latitude, longitude], popup=address).add_to(map)
     # Create a map object
-    map = folium.Map(location=[45.508888, -73.561668], zoom_start=13)
+    map = folium.Map(location=[45.53832923645949, -73.67523042389348], zoom_start=13)
 
     # Add a marker to the map
-    folium.Marker([45.508888, -73.561668], popup='Montreal,QC').add_to(map)
-    folium.Marker([46.508888, -73.561668], popup='Shawinigan,QC').add_to(map)
+    folium.Marker([45.53832923645949, -73.67523042389348], popup='Montreal,QC').add_to(map)
+    
 
 
     map_html = map._repr_html_()
