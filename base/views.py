@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from .models import Service, Topic, Message
-from .forms import ServiceForm
+from .forms import ServiceForm,SignUpForm
 from geopy.geocoders import Nominatim
 import folium
 #from base.models import Adresse
@@ -50,15 +50,15 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    form = UserCreationForm(request.POST)
+    form = SignUpForm(request.POST)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):

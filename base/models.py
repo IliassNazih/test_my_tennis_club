@@ -12,6 +12,7 @@ class Service(models.Model):
     topic = models.ForeignKey(Topic, on_delete = models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank = True)
+    address = models.TextField(null=True, blank = True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
