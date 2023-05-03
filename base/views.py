@@ -146,19 +146,30 @@ def deleteService(request, pk):
 
 def map_view(request):
     geolocator = Nominatim(user_agent="TEST_MY_TENNIS_CLUB")
+    bdeb = geolocator.geocode('10555 Ave de Bois-de-Boulogne, Montreal')
+    map = folium.Map(location=[bdeb.latitude, bdeb.longitude], zoom_start=10)
 
     # Add a marker to the map
     for obj in Service.objects.all():
         location = geolocator.geocode(obj.address)
-        map = folium.Map(location=[location.latitude, location.longitude], zoom_start=10)
-        folium.Marker([location.latitude, location.longitude], popup=Service.name).add_to(map)
-        
-    
-
+        if location is not None:
+            latitude = location.latitude
+            longitude = location.longitude
+            popup_text = f"<b>{obj.topic}</b><br>{obj.name}"
+        folium.Marker([latitude, longitude], popup=popup_text).add_to(map)
 
     map_html = map._repr_html_()
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
+    
+    
+        
+    
+        
+    
+
+
+    
 
 #def liste_adresses(request):
     adresses = Adresse.objects.all()
