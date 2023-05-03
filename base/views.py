@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from .models import Service, Topic, Message
-from .forms import ServiceForm
+from .forms import ServiceForm,SignUpForm
 from geopy.geocoders import Nominatim
 import folium
 #from base.models import Adresse
-from base.forms import UserForm
 
 # services = [
 #     {'id':1, 'name':'deneigement'},
@@ -50,15 +50,15 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    form = UserForm(request.POST)
+    form = SignUpForm(request.POST)
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
-        form = UserForm()
+        form = SignUpForm()
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):

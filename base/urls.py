@@ -16,5 +16,5 @@ urlpatterns = [
     path('update-service/<str:pk>/', views.updateService, name = "update-service"),
     path('delete-service/<str:pk>/', views.deleteService, name = "delete-service"),
     path('map_view/', views.map_view, name='map_view'),
-    #path('liste_adresses/', views.liste_adresses, name='liste_adresses'),
+    
 ]

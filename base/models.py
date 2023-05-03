@@ -12,6 +12,7 @@ class Service(models.Model):
     topic = models.ForeignKey(Topic, on_delete = models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank = True)
+    address = models.TextField(null=True, blank = True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -31,13 +32,7 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
-    
-###class Adresse(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=10)
+
 
     def __str__(self):
         return f"{self.address}, {self.city}, {self.zip_code}"
