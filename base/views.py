@@ -141,10 +141,14 @@ def deleteService(request, pk):
     return render(request, 'base/delete.html', {'obj': service})
 
 def map_view(request):
-    map = folium.Map(location=[45.53832923645949, -73.67523042389348], zoom_start=13)
+    geolocator = Nominatim(user_agent="TEST_MY_TENNIS_CLUB")
 
     # Add a marker to the map
-    folium.Marker([45.53832923645949, -73.67523042389348], popup='Montreal,QC').add_to(map)
+    for obj in Service.objects.all():
+        location = geolocator.geocode(obj.address)
+        map = folium.Map(location=[location.latitude, location.longitude], zoom_start=10)
+        folium.Marker([location.latitude, location.longitude], popup=Service.name).add_to(map)
+        
     
 
 
@@ -152,6 +156,3 @@ def map_view(request):
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
 
-#def liste_adresses(request):
-    adresses = Adresse.objects.all()
-    return render(request, 'liste_adresses.html', {'adresses': adresses})
