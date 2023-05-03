@@ -49,6 +49,10 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+def infos(request):
+    context = {'infos': infos}
+    return render(request, 'base/infos.html', context)
+
 def registerPage(request):
     form = SignUpForm(request.POST)
     if request.method == 'POST':
