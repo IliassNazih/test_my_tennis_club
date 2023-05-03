@@ -9,7 +9,7 @@ from .models import Service, Topic, Message
 from .forms import ServiceForm
 from geopy.geocoders import Nominatim
 import folium
-from base.models import Adresse
+#from base.models import Adresse
 from base.forms import UserForm
 
 # services = [
@@ -50,15 +50,15 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    form = CustomUserCreationForm(request.POST)
+    form = UserForm(request.POST)
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
-        form = CustomUserCreationForm()
+        form = UserForm()
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
@@ -141,16 +141,6 @@ def deleteService(request, pk):
     return render(request, 'base/delete.html', {'obj': service})
 
 def map_view(request):
-    address = "1600 Amphitheatre Parkway, Mountain View, CA"
-    geolocator = Nominatim(user_agent="my-application")
-    location = geolocator.geocode(address)
-    latitude = location.latitude
-    longitude = location.longitude
-    # create a map centered on the location of the address
-    # map = folium.Map(location=[latitude, longitude], zoom_start=15)
-    # # add a marker to the map with a popup showing the address
-    # marker = folium.Marker([latitude, longitude], popup=address).add_to(map)
-    # Create a map object
     map = folium.Map(location=[45.53832923645949, -73.67523042389348], zoom_start=13)
 
     # Add a marker to the map
@@ -162,6 +152,6 @@ def map_view(request):
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
 
-def liste_adresses(request):
+#def liste_adresses(request):
     adresses = Adresse.objects.all()
     return render(request, 'liste_adresses.html', {'adresses': adresses})

@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from .models import Service
 from django import forms
-from base.models import Adresse
+#from base.models import Adresse
 
 class ServiceForm(ModelForm):
     class Meta:
@@ -13,4 +13,4 @@ class ServiceForm(ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'password']
