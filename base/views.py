@@ -167,3 +167,25 @@ def map_view(request):
 
     
 
+#def liste_adresses(request):
+    adresses = Adresse.objects.all()
+    return render(request, 'liste_adresses.html', {'adresses': adresses})
+
+
+
+
+
+
+
+
+
+
+
+
+
+    from django.http import HttpResponse
+from django.template import loader
+def index(request):
+     template = loader.get_template('navbar.html')
+     context = {}
+     return HttpResponse(template.render(context, request))
