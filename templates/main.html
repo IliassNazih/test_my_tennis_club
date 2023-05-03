@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 {% load bootstrap5 %}
-
-        {% bootstrap_css %}
-
-        {% bootstrap_javascript %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 <html>
 <head>
     <meta charset='utf-8'>
@@ -12,20 +10,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Service à domicile rapide</title>
+    <title>SRAD</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}">
     
 </head>
-<body>
-    <div class="jumbotron">
-        <div class="container text-center">
-          <h1>Service a Domicile rapide</h1>      
+<body style="background-color: rgb(255, 255, 255);">
+
+    <div class="container-fluid p-5 text-white text-center" style="background-color: rgb(18, 46, 119);">
+          <h1>SERVICES RAPIDES À DOMICILE</h1>      
           <p>Demandez et faites des services a des milliers d'utilisateurs</p>
-        </div>
       </div>
 
-<body style="background-color: rgb(255, 255, 255);">
+
     {% include 'navbar.html' %}
 
     {% if messages %}
@@ -36,7 +33,7 @@
     </ul>
     {% endif %}
 
-    <img src = "{% static 'images/Models.jpg' %}" />
+    <!-- <img src = "{% static 'images/Models.jpg' %}" />-->
     
     {% block content %}
 
