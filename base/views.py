@@ -54,15 +54,15 @@ def infos(request):
     return render(request, 'base/infos.html', context)
 
 def registerPage(request):
-    form = SignUpForm(request.POST)
+    form = UserCreationForm(request.POST)
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
-        form = SignUpForm()
+        form = UserCreationForm()
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
