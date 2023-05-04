@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<div class="comment-wrapper">
+    <h3>Messagerie</h3>
+    <hr>
+
+    {% for message in conversation %}
+    <div>
+        <small>@{{message.user}}  {{message.created|timesince}} ago</small>
+        <p>{{message.body}}</p>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+
+{% if request.user.is_authenticated %}
+<div class="comment-form">
+    <form method ="POST" action = "">
+        {% csrf_token %}
+        <input type="text" name="body" placeholder="Écrivez votre message...">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

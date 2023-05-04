@@ -4,6 +4,9 @@
 <div>
     <form method = "POST" accept = "" >
         {% csrf_token %}
+        <p>Veuillez entrer la ville et la province
+            Ex: 123 Rue du Phare, Montréal, Québec
+        </p>
         {{form.as_p}}
         <input type= "submit" value = "Submit" />
     </form>

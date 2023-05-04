@@ -53,6 +53,17 @@ def infos(request):
     context = {'infos': infos}
     return render(request, 'base/infos.html', context)
 
+def messagerie(request,pk):
+    service = Service.objects.get(id=pk)
+    conversation = service.message_set.all().order_by('-created')
+    if request.method == 'POST':
+        message = Message.objects.create(user= request.user,
+                                         service = service,
+                                         body = request.POST.get('body'))
+        return redirect('message', pk = service.id)
+    context = {'service': service, 'conversation': conversation}
+    return render(request, 'base/messagerie.html', context)
+
 def registerPage(request):
     form = UserCreationForm(request.POST)
     if request.method == 'POST':
