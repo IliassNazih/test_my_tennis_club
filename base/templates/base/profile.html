@@ -3,5 +3,24 @@
 {% block content %}
 
 <h1>{{user.username}}</h1>
+<h2>Voici vos demandes de service</h2>
+<div>
+    {% for service in services %}
+        <div>
+            {% if request.user == service.host %}
+            <a href = "{% url 'update-service' service.id %}">Edit</a>
+            <a href = "{% url 'delete-service' service.id %}">Delete</a>
+            {% endif %}
 
+        
+            {% if request.user == service.host %}
+            <h5>{{service.id}} -- <a href="{% url 'message' service.id %}">{{service.name}}</a></h5>
+            <small>{{service.topic.name}}</small>
+            <hr>
+            {% endif %}
+                       
+        </div>
+
+    {% endfor %}
+    </div>
 {% endblock content %}

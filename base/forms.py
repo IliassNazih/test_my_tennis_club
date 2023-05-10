@@ -7,6 +7,7 @@ from django import forms
 
 class ServiceForm(ModelForm):
     address = forms.CharField(max_length=255, required=True)
+    montant = forms.DecimalField(decimal_places = 2,min_value = 1.00, max_value=1000.00, required= True)
     class Meta:
         model = Service
         fields = '__all__'

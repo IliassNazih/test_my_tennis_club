@@ -9,7 +9,11 @@
                 {% endif %}
 
                 <a href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
+                {% if request.user == service.host %}
+                <h5>{{service.id}} -- <a href="{% url 'message' service.id %}">{{service.name}}</a></h5>
+                {% else %}
                 <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                {% endif %}
                 <small>{{service.topic.name}}</small>
                 <hr>
             </div>
