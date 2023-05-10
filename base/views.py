@@ -55,7 +55,7 @@ def infos(request):
 
 def messagerie(request,pk):
     service = Service.objects.get(id=pk)
-    conversation = service.message_set.all().order_by('-created')
+    conversation = service.message_set.all().order_by('created')
     if request.method == 'POST':
         message = Message.objects.create(user= request.user,
                                          service = service,
@@ -107,7 +107,13 @@ def service(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user': user}
+    q=request.GET.get('q') if request.GET.get('q') !=None else ''
+    services = Service.objects.filter(
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
+        )
+    context = {'user': user, 'services':services}
     return render(request,'base/profile.html', context)
     
 
