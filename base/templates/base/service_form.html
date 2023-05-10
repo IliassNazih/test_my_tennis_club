@@ -1,14 +1,24 @@
 {% extends 'main.html' %}
 
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<div>
+<div class="row">
+    <div class="col "></div>
+    <div class="col-sm-6">
     <form method = "POST" accept = "" >
         {% csrf_token %}
+
         <p>Veuillez entrer la ville et la province
             Ex: 123 Rue du Phare, Montréal, Québec
         </p>
-        {{form.as_p}}
+        {{ form|crispy }}
+        
         <input type= "submit" value = "Submit" />
     </form>
+    </div>
+    
+    <div class="col "></div>
 </div>
 {% endblock content %}

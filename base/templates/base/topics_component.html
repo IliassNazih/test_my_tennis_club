@@ -2,12 +2,14 @@
         <hr>
         <div>
             <a class="nav-link" href = "{% url 'home' %}">
-                <h5>Tous ({{service_count}})</h5>
+                <h4>Tous       ({{service_count}})</h4>
             </a>
         </div>
 
         {% for topic in topics %}
             <div>
-                <a class="nav-link" href = "{% url 'home' %}?q={{topic.name}}">{{topic.name}} {{topic_count}}</a>
+                <a class="nav-link" href = "{% url 'home' %}?q={{topic.name}}">
+                    <h4>{{topic.name}} {{topic_count}}</h4>
+                </a>
             </div>
         {% endfor %}
