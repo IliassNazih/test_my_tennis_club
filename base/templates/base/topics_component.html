@@ -1,11 +1,13 @@
-<h2>Types de service</h2>        
+<h2 class="display-5">Types de service</h2>        
         <hr>
         <div>
-            <a href = "{% url 'home' %}">Tous</a>
+            <a class="nav-link" href = "{% url 'home' %}">
+                <h5>Tous ({{service_count}})</h5>
+            </a>
         </div>
 
         {% for topic in topics %}
             <div>
-                <a href = "{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+                <a class="nav-link" href = "{% url 'home' %}?q={{topic.name}}">{{topic.name}} {{topic_count}}</a>
             </div>
         {% endfor %}
