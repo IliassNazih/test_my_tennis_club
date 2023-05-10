@@ -166,7 +166,6 @@ def map_view(request):
     bdeb = geolocator.geocode('10555 Ave de Bois-de-Boulogne, Montreal')
     map = folium.Map(location=[bdeb.latitude, bdeb.longitude], zoom_start=10)
 
-    # Add a marker to the map
     for obj in Service.objects.all():
         location = geolocator.geocode(obj.address)
         if location is not None:
@@ -178,10 +177,3 @@ def map_view(request):
     map_html = map._repr_html_()
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
-
-
-
-
-#def liste_adresses(request):
-    adresses = Adresse.objects.all()
-    return render(request, 'liste_adresses.html', {'adresses': adresses})

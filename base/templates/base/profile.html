@@ -8,8 +8,8 @@
     {% for service in services %}
         <div>
             {% if request.user == service.host %}
-            <a href = "{% url 'update-service' service.id %}">Edit</a>
-            <a href = "{% url 'delete-service' service.id %}">Delete</a>
+            <a href = "{% url 'update-service' service.id %}">Modifier</a>
+            <a href = "{% url 'delete-service' service.id %}">Supprimer</a>
             {% endif %}
 
         
