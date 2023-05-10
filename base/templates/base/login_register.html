@@ -9,17 +9,17 @@
         {% csrf_token %}
 
         <label>Username:</label>
-        <input type = "text" name = "username" placeholder ="Enter Username"/>
+        <input type = "text" name = "username" placeholder ="Entrez votre nom d'utilisateur"/>
 
         <label>Password:</label>
-        <input type = "password" name = "password" placeholder ="Enter Password"/>
+        <input type = "password" name = "password" placeholder ="Entrez votre mot de passe"/>
 
 
-        <input type = "submit" value = "Login"/>
+        <input type = "submit" value = "Connection"/>
 
     </form>
-    <p>haven't signed up yet?</p>
-    <a href="{% url 'register' %} "> Sign up</a>
+    <p>Vous n'avez pas de compte?</p>
+    <a href="{% url 'register' %} "> Inscrivez-vous!</a>
 </div>
 
 {% else %}
@@ -31,8 +31,8 @@
         <input type = "submit" value = "Register"/>
 
     </form>
-    <p>Already signed up?</p>
-    <a href="{% url 'login' %} "> Login</a>
+    <p>Vous avez déjà un compte?</p>
+    <a href="{% url 'login' %} "> Connectez-vous!</a>
 </div>
 
 {% endif %}
