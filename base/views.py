@@ -65,15 +65,15 @@ def messagerie(request,pk):
     return render(request, 'base/messagerie.html', context)
 
 def registerPage(request):
-    form = UserCreationForm(request.POST)
+    form = SignUpForm(request.POST)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
@@ -172,35 +172,10 @@ def map_view(request):
     map_html = map._repr_html_()
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
-    
-    
-        
-    
-        
-    
 
 
-    
+
 
 #def liste_adresses(request):
     adresses = Adresse.objects.all()
     return render(request, 'liste_adresses.html', {'adresses': adresses})
-
-
-
-
-
-
-
-
-
-
-
-
-
-    from django.http import HttpResponse
-from django.template import loader
-def index(request):
-     template = loader.get_template('navbar.html')
-     context = {}
-     return HttpResponse(template.render(context, request))
