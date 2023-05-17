@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
@@ -127,7 +127,6 @@ def createService(request):
             service.host = request.user
             service.save()
             return redirect('home')
-
     context = {'form': form}
     return render(request, 'base/service_form.html', context)
 
