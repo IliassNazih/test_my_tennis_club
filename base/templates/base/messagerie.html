@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="comment-wrapper">
+<div class="container pt-5 container-fluid">
     <h3>Messagerie</h3>
     <hr>
 
@@ -16,11 +16,13 @@
 </div>
 
 {% if request.user.is_authenticated %}
-<div class="comment-form">
+<div class="container pt-5 container-fluid">
+<div class="comment-form ">
     <form method ="POST" action = "">
         {% csrf_token %}
-        <input type="text" name="body" placeholder="Écrivez votre message...">
+        <input type="text" class="form-control" name="body" placeholder="Écrivez votre message...">
     </form>
+</div>
 </div>
 {% endif %}
 {% endblock %}

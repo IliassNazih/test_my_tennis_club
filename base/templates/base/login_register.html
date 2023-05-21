@@ -1,33 +1,48 @@
 {% extends 'main.html' %}
-
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% crispy form %}
 {% block content %}
 
 
 {% if page == 'login' %}
-<div>
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+<div class="container pt-5 container-fluid">
     <form method = "POST" action = "">
         {% csrf_token %}
-
-        <label>Username:</label>
-        <input type = "text" name = "username" placeholder ="Entrez votre nom d'utilisateur"/>
-
-        <label>Password:</label>
-        <input type = "password" name = "password" placeholder ="Entrez votre mot de passe"/>
-
-
-        <input type = "submit" value = "Connection"/>
-
+       
+        <div class="row">
+            <div class="col-auto">
+              <label type = "text" class="col-form-label">Nom d'utilisateur</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" name = "username" placeholder="Entrez votre nom d'utilisateur">
+        </div>
+    
+            <div class="col-auto">
+              <label type = "text" class="col-form-label">Mot de passe</label>
+            </div>
+            <div class="col-auto">
+              <input type="password" id="inputPassword6" class="form-control" aria-labelledby="passwordHelpInline" name = "password" placeholder ="Entrez votre mot de passe">
+        </div>
+    </div>
+        <div><input type = "submit" value = "Connexion"/></div>
     </form>
     <p>Vous n'avez pas de compte?</p>
     <a href="{% url 'register' %} "> Inscrivez-vous!</a>
 </div>
 
 {% else %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
-<div>
+<div class="container pt-5 container-fluid">
     <form method = "POST" action = "">
         {% csrf_token %}
-        {{form.as_p}}
+
+        {% crispy form %}
         <input type = "submit" value = "Register"/>
 
     </form>

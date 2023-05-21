@@ -1,18 +1,37 @@
 {% extends 'main.html' %}
 
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% crispy form %}
+
 {% block content %}
-<div class="row">
+<div class="row m-4">
     <div class="col "></div>
     <div class="col-sm-6">
-    <form method = "POST" class="card p-3 mt-5" accept = "" >
+    <form method = "POST" accept = "" >
         {% csrf_token %}
-
+        <div class="row">
+            <div class="col-6">
+              {{ form.topic|as_crispy_field }}
+            </div>
+            <div class="col-6">
+              {{ form.name|as_crispy_field }}
+            </div>
+          </div>
         <p>Veuillez entrer la ville et la province
             Ex: 123 Rue du Phare, Montréal, Québec
         </p>
-        {{ form }}
-        <button type="submit" class="btn btn-primary">submit</button>
-        <!--<input type= "submit" value = "Submit" />-->
+          <div class="row">
+            <div class="col-6">
+              {{ form.address|as_crispy_field }}
+            </div>
+            <div class="col-6">
+              {{ form.montant|as_crispy_field }}
+            </div>
+            {{ form.description|as_crispy_field }}
+          </div>
+        
+          <button type="submit" class="btn btn-success">Soumettre</button>
     </form>
     </div>
     
