@@ -1,13 +1,13 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
+<div class="container pt-5 container-fluid">
 <h1> Service : {{service.name}} </h1>
 
 <p> Description : {{service.description}}</p>
 <p> Adresse : {{service.address}}</p>
 <p> Montant demandé : {{service.montant}} $</p>
 
-<a href="{% url 'message' service.id %}"> Répondre à ce service?</a>
-
+<a class="nav-link" href="{% url 'message' service.id %}"> Clicker ici épondre à ce service?</a>
+</div>
 {% endblock %}
