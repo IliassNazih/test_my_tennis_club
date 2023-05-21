@@ -3,10 +3,15 @@
 {% block content %}
 <div class="container pt-5 container-fluid">
 <h1>{{user.username}}</h1>
+{% if request.user.username == user.username %}
 <h2>Voici vos demandes de service</h2>
+{% else %}
+<h2>Voici les demandes de service de {{user.username}}</h2>
+{% endif %}
 <div>
     {% for service in services %}
         <div>
+            {% if request.user == service.host and request.user.username == user.username %}
             {% if request.user == service.host %}
             <a href = "{% url 'update-service' service.id %}">Modifier</a>
             <a href = "{% url 'delete-service' service.id %}">Supprimer</a>
@@ -18,7 +23,14 @@
             <small>{{service.topic.name}}</small>
             <hr>
             {% endif %}
-                       
+
+            {% else %}
+            {% if request.user != service.host and request.user.username != user.username %}
+            <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+            <small>{{service.topic.name}}</small>
+            <hr>
+            {% endif %} 
+            {% endif %} 
         </div>
 
     {% endfor %}
