@@ -1,5 +1,5 @@
 """
-ASGI config for my_tennis_club project.
+ASGI config for services_rapides_a_domicile project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_tennis_club.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'services_rapides_a_domicile.settings')
 
 application = get_asgi_application()

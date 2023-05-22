@@ -1,5 +1,5 @@
 """
-WSGI config for my_tennis_club project.
+WSGI config for services_rapides_a_domicile.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_tennis_club.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'services_rapides_a_domicile.settings')
 
 application = get_wsgi_application()
