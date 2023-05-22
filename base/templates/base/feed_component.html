@@ -1,22 +1,81 @@
-
-
-        <div>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        
+        .service {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        
+        .service:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service a {
+            text-decoration: none;
+            color: #337ab7;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .service a:hover {
+            color: #23527c;
+        }
+        
+        .service h5 {
+            margin: 0;
+            font-size: 18px;
+            color: #333333;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .service h5 a {
+            color: #333333;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .service h5 a:hover {
+            color: #555555;
+        }
+        
+        .service small {
+            color: #777777;
+        }
+        
+        .service hr {
+            border-color: #dddddd;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
         {% for service in services %}
-            <div>
+            <div class="service">
                 {% if request.user == service.host %}
-                <a href = "{% url 'update-service' service.id %}">Edit</a>
-                <a href = "{% url 'delete-service' service.id %}">Delete</a>
+                <a href="{% url 'update-service' service.id %}">Edit</a>
+                <a href="{% url 'delete-service' service.id %}">Delete</a>
                 {% endif %}
 
                 <a href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
                 {% if request.user == service.host %}
-                <h5>{{service.id}} -- <a href="{% url 'message' service.id %}">{{service.name}}</a></h5>
+                <h5>{{service.id}} — <a href="{% url 'message' service.id %}">{{service.name}}</a></h5>
                 {% else %}
-                <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                <h5>{{service.id}} — <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
                 {% endif %}
                 <small>{{service.topic.name}}</small>
                 <hr>
             </div>
-
         {% endfor %}
-        </div>
+    </div>
+</body>
+</html>
