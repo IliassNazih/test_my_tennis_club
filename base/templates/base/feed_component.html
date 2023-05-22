@@ -2,20 +2,29 @@
 
         <div>
         {% for service in services %}
-            <div>
-                {% if request.user == service.host %}
-                <a href = "{% url 'update-service' service.id %}">Edit</a>
-                <a href = "{% url 'delete-service' service.id %}">Delete</a>
-                {% endif %}
+            <div class="container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
+                <div class="row">
+                    <div class="col-4">
+                        {% if request.user == service.host %}
+                        <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5>
+                        {% else %}
+                        <h5><a class="nav-link" href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="col-8 d-flex gap-2 justify-content-end">
+                        {% if request.user == service.host %}
+                        <a class="nav-link" href = "{% url 'update-service' service.id %}">Modifier</a>
+                        <a class="nav-link" href = "{% url 'delete-service' service.id %}">Supprimer</a>
+                        {% endif %}
 
-                <a href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
-                {% if request.user == service.host %}
-                <h5>{{service.id}} -- <a href="{% url 'message' service.id %}">{{service.name}}</a></h5>
-                {% else %}
-                <h5>{{service.id}} -- <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
-                {% endif %}
-                <small>{{service.topic.name}}</small>
-                <hr>
+                        <a class="nav-link" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
+                    </div>
+
+                </div>
+                <h5>{{service.montant}}$</h5>
+                <p>{{service.topic.name}}</p>
+                
             </div>
 
         {% endfor %}
