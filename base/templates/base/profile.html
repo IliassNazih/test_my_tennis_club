@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container pt-5 container-fluid">
+{% if request.user.is_authenticated %}
 <h1>{{user.username}}</h1>
 {% if request.user.username == user.username %}
 <h2>Voici vos demandes de service</h2>
@@ -35,5 +36,8 @@
 
     {% endfor %}
     </div>
+     {% else %}
+     <a href="{% url 'login' %} "> Connectez-vous pour intéragir avec {{user.username}}!</a>
+     {% endif %}
 </div>
 {% endblock content %}
