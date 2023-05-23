@@ -10,13 +10,7 @@ from .models import Service, Topic, Message
 from .forms import ServiceForm,SignUpForm
 from geopy.geocoders import Nominatim
 import folium
-#from base.models import Adresse
 
-# services = [
-#     {'id':1, 'name':'deneigement'},
-#     {'id':2, 'name':'tondeuse'},
-#     {'id':3, 'name':'laveauto'},
-# ]
 
 def loginPage(request):
     

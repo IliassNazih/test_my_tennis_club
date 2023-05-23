@@ -22,8 +22,7 @@
                     <div class="col-5">
                         {% if request.user == service.host %}
                         <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5>
-                        {% else %}
-                        <h5><a class="nav-link" href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                    
                         {% endif %}
                         <h5>{{service.montant}}$</h5>
                         <p>{{service.topic.name}}</p>
@@ -55,9 +54,8 @@
                         <img src={{service.image.url}} class="img-thumbnail p-2 m-2"/>
                     </div>
                     <div class="col-5">
-                        {% if request.user == service.host %}
-                        <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5>
-                        {% else %}
+                        {% if user == service.host %}
+
                         <h5><a class="nav-link" href="{% url 'service' service.id %}">{{service.name}}</a></h5>
                         {% endif %}
                         <h5>{{service.montant}}$</h5>
