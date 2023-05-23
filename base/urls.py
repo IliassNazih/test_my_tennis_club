@@ -19,7 +19,8 @@ urlpatterns = [
     path('update-service/<str:pk>/', views.updateService, name = "update-service"),
     path('delete-service/<str:pk>/', views.deleteService, name = "delete-service"),
     path('map_view/', views.map_view, name='map_view'),
-    path('service/<str:pk>/message/', views.messagerie, name='message')
+    path('service/<str:pk>/message/', views.messagerie, name='message'),
+     path('service/<int:pk>/map/', views.service_map_view, name='service_map_view')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

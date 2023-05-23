@@ -177,3 +177,28 @@ def map_view(request):
     map_html = map._repr_html_()
     context = {'map_html': map_html}
     return render(request, 'map.html', context)
+
+def service_map_view(request, pk):
+    # Get the service object based on the provided primary key (pk)
+    service = Service.objects.get(id=pk)
+
+    # Create a geolocator instance
+    geolocator = Nominatim(user_agent="TEST_MY_TENNIS_CLUB")
+
+    # Geocode the address of the service
+    location = geolocator.geocode(service.address)
+
+    # Create a map centered around the service location
+    maps = folium.Map(location=[location.latitude, location.longitude], zoom_start=10)
+
+    # Add a marker for the service location
+    popup_text = f"<b>{service.topic}</b><br>{service.name}"
+    folium.Marker([location.latitude, location.longitude], popup=popup_text).add_to(maps)
+
+    # Generate the HTML representation of the map
+    map_service_html = maps._repr_html_()
+
+    # Pass the map HTML to the template context
+    context = {'map_service_html': map_service_html}
+
+    return render(request, 'map_service.html', context)
