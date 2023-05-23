@@ -78,6 +78,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'services_rapides_a_domicile.wsgi.application'
 
 
