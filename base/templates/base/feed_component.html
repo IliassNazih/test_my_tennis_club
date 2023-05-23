@@ -72,11 +72,14 @@
                         <p>{{service.topic.name}}</p>
                     </div>
                     
-                    <div class="col-4 justify-content-end">
-                        <a class="nav-link justify-content-end" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
+                    <div class="col-4">
+                        <div><a class="nav-link float-end" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a></div>
+                        <br>
                         {% if request.user == service.host %}
-                        <a class="nav-link justify-content-end" href = "{% url 'update-service' service.id %}">Modifier</a>
-                        <a class="nav-link justify-content-end" href = "{% url 'delete-service' service.id %}">Supprimer</a>
+                        <div><a class="nav-link float-end" href = "{% url 'update-service' service.id %}">Modifier</a></div>
+                        <br>
+                        <div><a class="nav-link float-end" href = "{% url 'delete-service' service.id %}">Supprimer</a></div>
+
                         {% endif %}
 
                         
