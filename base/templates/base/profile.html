@@ -3,15 +3,17 @@
 {% block content %}
 <div class="container pt-5 container-fluid">
 {% if request.user.is_authenticated %}
-<h1>{{user.username}}</h1>
-{% if request.user.username == user.username %}
-<h2>Voici vos demandes de service</h2>
-{% else %}
-<h2>Voici les demandes de service de {{user.username}}</h2>
-{% endif %}
+    <h1>{{user.username}}</h1>
+    {% if request.user.username == user.username %}
+    <h2>Voici vos demandes de service</h2>
+    {% else %}
+    <h2>Voici les demandes de service de {{user.username}}</h2>
+
+    {% endif %}
 <div>
     {% for service in services %}
         <div>
+            
             {% if request.user == service.host and request.user.username == user.username %}
             {% if request.user == service.host %}
             <div class="boite container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
@@ -20,10 +22,7 @@
                         <img src={{service.image.url}} class="img-thumbnail p-2 m-2"/>
                     </div>
                     <div class="col-5">
-                        {% if request.user == service.host %}
-                        <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5>
-                    
-                        {% endif %}
+                        <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5> 
                         <h5>{{service.montant}}$</h5>
                         <p>{{service.topic.name}}</p>
                     </div>
@@ -31,57 +30,38 @@
                     <div class="col-4">
                         <div><a class="nav-link float-end" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a></div>
                         <br>
-                        {% if request.user == service.host %}
                         <div><a class="nav-link float-end" href = "{% url 'update-service' service.id %}">Modifier</a></div>
                         <br>
-                        <div><a class="nav-link float-end" href = "{% url 'delete-service' service.id %}">Supprimer</a></div>
-
-                        {% endif %}
-
-                        
+                        <div><a class="nav-link float-end" href = "{% url 'delete-service' service.id %}">Supprimer</a></div>  
                     </div>
 
                 </div>
             </div>
-            {% endif %}
+            {% endif %} 
+            {% elif user == service.host %}
 
-
-            {% else %}
-            {% if request.user != service.host and request.user.username != user.username %}
             <div class="boite container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
                 <div class="row">
                     <div class="col-3">
                         <img src={{service.image.url}} class="img-thumbnail p-2 m-2"/>
                     </div>
                     <div class="col-5">
-                        {% if user == service.host %}
-
                         <h5><a class="nav-link" href="{% url 'service' service.id %}">{{service.name}}</a></h5>
-                        {% endif %}
                         <h5>{{service.montant}}$</h5>
                         <p>{{service.topic.name}}</p>
                     </div>
                     
                     <div class="col-4">
-                        <div><a class="nav-link float-end" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a></div>
-                        <br>
-                        {% if request.user == service.host %}
-                        <div><a class="nav-link float-end" href = "{% url 'update-service' service.id %}">Modifier</a></div>
-                        <br>
-                        <div><a class="nav-link float-end" href = "{% url 'delete-service' service.id %}">Supprimer</a></div>
-
-                        {% endif %}
-
-                        
+                        <div><a class="nav-link float-end" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a></div> 
                     </div>
 
                 </div>
             </div>
-            {% endif %} 
+            
             {% endif %} 
         </div>
-
     {% endfor %}
+
     </div>
      {% else %}
      <a href="{% url 'login' %} "> Connectez-vous pour intéragir avec {{user.username}}!</a>
