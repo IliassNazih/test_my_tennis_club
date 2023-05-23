@@ -1,8 +1,63 @@
-
-
-        <div>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        
+        .service {
+            background-color: #ffffff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .boite:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service a {
+            text-decoration: none;
+            color: #337ab7;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .service a:hover {
+            color: #23527c;
+        }
+        
+        .service h5 {
+            margin: 0;
+            font-size: 18px;
+            color: #333333;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .service h5 a {
+            color: #333333;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .service h5 a:hover {
+            color: #555555;
+        }
+        
+        .service small {
+            color: #777777;
+        }
+        
+        .service hr {
+            border-color: #dddddd;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="service">
         {% for service in services %}
-            <div class="container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
+            <div class="boite container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
                 <div class="row">
                     <div class="col-4">
                         {% if request.user == service.host %}
@@ -25,7 +80,9 @@
                 <h5>{{service.montant}}$</h5>
                 <p>{{service.topic.name}}</p>
                 
+            
             </div>
-
         {% endfor %}
-        </div>
+    </div>
+</body>
+</html>

@@ -9,6 +9,7 @@
 <h4>Adresse</h4>
 <p>{{service.address}}</p>
 
+<a class="nav-link text-primary" href="{% url 'service_map_view' service.id %}">Cliquer ici afin de voir la carte</a>
 
 <a class="nav-link text-primary" href="{% url 'message' service.id %}"> Cliquer ici pour répondre à ce service</a>
 </div>
