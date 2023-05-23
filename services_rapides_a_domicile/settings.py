@@ -84,23 +84,23 @@ WSGI_APPLICATION = 'services_rapides_a_domicile.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}'''
+
+
+import dj_database_url
+
+DATABASES = {
+        'default': dj_database_url.parse('postgres://tudor:H3gMVLUYVpJT4zI6YwxfMIuL48acreO1@dpg-chmcicak728ntj8fl850-a.oregon-postgres.render.com/srad')
+
 }
 
-'''DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'db1',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host': 'mongodb+srv://iliassnazih:1234@sdr.rj9zgnz.mongodb.net/test'
-            }  
-        }
-}'''
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
