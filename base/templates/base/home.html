@@ -13,9 +13,10 @@
         </a>
         </div>
 
-        <div class="col-sm-8 m-2">
-        <h3>{{service_count}} services disponibles</h3>
-        <a href = "{% url 'create-service' %}">Crée une demande de service</a>
+        <div class="col-sm-7 m-2">
+            <div class="container mb-4">
+                <h2>{{service_count}} services disponibles</h2>
+            </div>
 
         {% include 'base/feed_component.html' %}
         </div> 

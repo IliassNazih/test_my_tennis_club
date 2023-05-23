@@ -9,14 +9,11 @@
         
         .service {
             background-color: #ffffff;
-            border-radius: 5px;
             padding: 10px;
             margin-bottom: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease-in-out;
         }
         
-        .service:hover {
+        .boite:hover {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         
@@ -58,22 +55,32 @@
     </style>
 </head>
 <body>
-    <div>
+    <div class="service">
         {% for service in services %}
-            <div class="service">
-                {% if request.user == service.host %}
-                <a href="{% url 'update-service' service.id %}">Edit</a>
-                <a href="{% url 'delete-service' service.id %}">Delete</a>
-                {% endif %}
+            <div class="boite container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
+                <div class="row">
+                    <div class="col-4">
+                        {% if request.user == service.host %}
+                        <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5>
+                        {% else %}
+                        <h5><a class="nav-link" href="{% url 'service' service.id %}">{{service.name}}</a></h5>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="col-8 d-flex gap-2 justify-content-end">
+                        {% if request.user == service.host %}
+                        <a class="nav-link" href = "{% url 'update-service' service.id %}">Modifier</a>
+                        <a class="nav-link" href = "{% url 'delete-service' service.id %}">Supprimer</a>
+                        {% endif %}
 
-                <a href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
-                {% if request.user == service.host %}
-                <h5>{{service.id}} — <a href="{% url 'message' service.id %}">{{service.name}}</a></h5>
-                {% else %}
-                <h5>{{service.id}} — <a href="{% url 'service' service.id %}">{{service.name}}</a></h5>
-                {% endif %}
-                <small>{{service.topic.name}}</small>
-                <hr>
+                        <a class="nav-link" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
+                    </div>
+
+                </div>
+                <h5>{{service.montant}}$</h5>
+                <p>{{service.topic.name}}</p>
+                
+            
             </div>
         {% endfor %}
     </div>

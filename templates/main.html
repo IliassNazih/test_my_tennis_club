@@ -19,7 +19,7 @@
     <div class="container-fluid p-5 text-white text-center" style="background-color: rgb(18, 46, 119);">
       {% load static %}
       <img src="{% static "..\static\images\Logo_SRAD.png" %}" alt="home" style="width: 400px;" />     
-      <p>Demandez et faites des services a des milliers d'utilisateurs</p>  
+      <p>Offres et demandes de services pour vous</p>  
       </div>
       <div class="container-fluid p-2 " style="background-color: rgb(18, 46, 119);">
       </div>
@@ -27,13 +27,7 @@
 
     {% include 'navbar.html' %}
 
-    {% if messages %}
-    <ul class="messages">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-    {% endif %}
+    
 
     <!-- <img src = "{% static 'images/Models.jpg' %}" />-->
     
