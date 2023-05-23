@@ -8,7 +8,7 @@
 <div class="row m-4">
     <div class="col "></div>
     <div class="col-sm-6">
-    <form method = "POST" accept = "" >
+    <form method = "POST" accept = "" enctype="multipart/form-data" >
         {% csrf_token %}
         <div class="row">
             <div class="col-6">
@@ -29,7 +29,9 @@
               {{ form.montant|as_crispy_field }}
             </div>
             {{ form.description|as_crispy_field }}
+            {{ form.image|as_crispy_field }}
           </div>
+          
         
           <button type="submit" class="btn btn-success">Soumettre</button>
     </form>

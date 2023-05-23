@@ -18,7 +18,7 @@ class Service(models.Model):
     updated = models.DateTimeField(auto_now=True)
     montant = models.DecimalField(max_digits=6, decimal_places=2,default=0.00)
     created = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='files/images',default="images\Logo_SRAD.png")
+    image = models.ImageField(upload_to='base/files/images',default="base\files\images\Logo_SRAD.png")
 
 
     class Meta:

@@ -59,28 +59,30 @@
         {% for service in services %}
             <div class="boite container-fluid mt-2 border border-dark-subtle rounded-3 shadow-sm" >
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
+                        <img src={{service.image.url}} class="img-thumbnail p-2 m-2"/>
+                    </div>
+                    <div class="col-5">
                         {% if request.user == service.host %}
                         <h5><a class="nav-link" href="{% url 'message' service.id %}">{{service.name}}</a></h5>
                         {% else %}
                         <h5><a class="nav-link" href="{% url 'service' service.id %}">{{service.name}}</a></h5>
                         {% endif %}
+                        <h5>{{service.montant}}$</h5>
+                        <p>{{service.topic.name}}</p>
                     </div>
                     
-                    <div class="col-8 d-flex gap-2 justify-content-end">
+                    <div class="col-4 justify-content-end">
+                        <a class="nav-link justify-content-end" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
                         {% if request.user == service.host %}
-                        <a class="nav-link" href = "{% url 'update-service' service.id %}">Modifier</a>
-                        <a class="nav-link" href = "{% url 'delete-service' service.id %}">Supprimer</a>
+                        <a class="nav-link justify-content-end" href = "{% url 'update-service' service.id %}">Modifier</a>
+                        <a class="nav-link justify-content-end" href = "{% url 'delete-service' service.id %}">Supprimer</a>
                         {% endif %}
 
-                        <a class="nav-link" href="{% url 'user-profile' service.host.id %}">@{{service.host.username}}</a>
+                        
                     </div>
 
                 </div>
-                <h5>{{service.montant}}$</h5>
-                <p>{{service.topic.name}}</p>
-                
-            
             </div>
         {% endfor %}
     </div>

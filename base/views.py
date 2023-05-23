@@ -121,7 +121,7 @@ def userProfile(request, pk):
 def createService(request):
     form = ServiceForm()
     if request.method == 'POST':
-        form = ServiceForm(request.POST)
+        form = ServiceForm(request.POST, request.FILES)
         if form.is_valid():
             service = form.save(commit= False)
             service.host = request.user
